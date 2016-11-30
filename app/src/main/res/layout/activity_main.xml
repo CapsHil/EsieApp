@@ -8,7 +8,7 @@
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#3587c8">
+        android:background="@color/DarkRed">
     </FrameLayout>
     <!-- The navigation drawer -->
     <ListView android:id="@+id/left_drawer"

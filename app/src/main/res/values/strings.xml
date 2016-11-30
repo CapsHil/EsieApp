@@ -4,9 +4,11 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="home">Home</string>
-    <string name="battery">Battery</string>
+    <string name="notifications">Notifications</string>
+    <string name="beers">Beers</string>
+
     <!--Other-->
-    <string name="app_name">Sensor</string>
+    <string name="app_name">App\'ache</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_base">BaseActivity</string>
     <string name="action_settings">Settings</string>

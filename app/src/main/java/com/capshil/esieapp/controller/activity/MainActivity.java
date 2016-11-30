@@ -14,7 +14,9 @@ import java.util.ArrayList;
 
 import com.capshil.esieapp.R;
 import com.capshil.esieapp.controller.delegate.MainDelegate;
+import com.capshil.esieapp.controller.fragment.BeerFragment;
 import com.capshil.esieapp.controller.fragment.HomeFragment;
+import com.capshil.esieapp.controller.fragment.NotificationsFragment;
 import com.capshil.esieapp.controller.listener.DrawerItemClickListener;
 import com.capshil.esieapp.view.adapter.DrawerAdapter;
 import com.capshil.esieapp.view.element.DrawerItem;
@@ -32,11 +34,12 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mTitle = mDrawerTitle = getTitle();
-        mNavigationArray = new ArrayList<DrawerItem>();
+        mNavigationArray = new ArrayList<>();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         mNavigationArray.add(new DrawerItem(R.string.home, R.drawable.ic_action_home_red));
-        mNavigationArray.add(new DrawerItem(R.string.battery, R.drawable.ic_action_battery_red));
+        mNavigationArray.add(new DrawerItem(R.string.notifications, R.drawable.ic_action_battery_red));
+        mNavigationArray.add(new DrawerItem(R.string.beers, R.drawable.ic_action_battery_red));
         mDrawerList.setAdapter(new DrawerAdapter(this,R.layout.drawer_item, mNavigationArray));
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
 
@@ -68,8 +71,14 @@ public class MainActivity extends BaseActivity {
     }
 
     public void selectItem(int position) {
-        Fragment fragment = null;
+        Fragment fragment;
         switch(position) {
+            case 1:
+                fragment = new NotificationsFragment();
+                break;
+            case 2:
+                fragment = new BeerFragment();
+                break;
             default:
                 fragment = new HomeFragment();
                 break;

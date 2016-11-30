@@ -5,8 +5,9 @@
     <string name="drawer_close">Close navigation drawer</string>
     <string name="home">Home</string>
     <string name="notifications">Notifications</string>
+
     <!--Other-->
-    <string name="app_name">Sensor</string>
+    <string name="app_name">EsieApp</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_base">BaseActivity</string>
     <string name="action_settings">Settings</string>
