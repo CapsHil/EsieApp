@@ -8,13 +8,22 @@
     android:orientation="vertical"
     tools:context="com.capshil.esieapp.controller.fragment.NotificationsFragment">
 
-    <TextView
-        android:id="@+id/notifications"
+    <Button
+        android:id="@+id/button_simple_notifications"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:textSize="40sp"
-        android:textColor="@color/White"
-        android:gravity="center"
-        android:layout_margin="@dimen/default_margin"/>
+        android:text="Push a notification !"/>
+
+    <Button
+        android:id="@+id/button_toast_notifications"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Make a Toast !"/>
+
+    <Button
+        android:id="@+id/button_both_notifications"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Just do both !"/>
 
 </LinearLayout>

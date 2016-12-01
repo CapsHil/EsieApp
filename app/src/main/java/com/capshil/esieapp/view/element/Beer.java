@@ -1,5 +1,8 @@
 package com.capshil.esieapp.view.element;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Beer {
 
     private String name;
@@ -12,11 +15,15 @@ public class Beer {
     public Beer(){
     }
 
-    public Beer(String name, String description, int countryId, int categoryId){
-        this.name = name;
-        this.description = description;
-        this.countryId = countryId;
-        this.categoryId = categoryId;
+    public Beer(JSONObject jsonBeer){
+        try {
+            this.name = jsonBeer.getString("name");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+//        this.description = description;
+//        this.countryId = countryId;
+//        this.categoryId = categoryId;
     }
 
     public String getName() {
@@ -49,6 +56,11 @@ public class Beer {
 
     public void setCategory(String picture) {
         this.category = picture;
+    }
+
+    @Override
+    public String toString() {
+        return "Beer : "+this.name;
     }
 
 }
