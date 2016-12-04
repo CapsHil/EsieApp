@@ -11,5 +11,5 @@
         android:layout_height="206dp"
         android:id="@+id/imageView"
         android:layout_gravity="center"
-        android:src="@drawable/ic_aic" />
+        android:src="@drawable/logo_apache" />
 </FrameLayout>

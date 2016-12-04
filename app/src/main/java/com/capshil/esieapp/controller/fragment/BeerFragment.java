@@ -1,86 +1,132 @@
 package com.capshil.esieapp.controller.fragment;
 
 import android.app.Fragment;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.capshil.esieapp.R;
+import com.capshil.esieapp.library.HTTPRequest;
 import com.capshil.esieapp.library.JsonParser;
 import com.capshil.esieapp.view.element.Beer;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.util.ArrayList;
+import java.net.URI;
+import android.app.ProgressDialog;
+import android.util.Log;
+
+import static android.R.attr.progress;
 
 
 public class BeerFragment extends Fragment {
 
+    private static final String TEST_URL                   = "http://binouze.fabrigli.fr/bieres.json";
+    private static final String ACTION_FOR_INTENT_CALLBACK = "THIS_IS_A_UNIQUE_KEY_WE_USE_TO_COMMUNICATE";
+    private static final String TAG = "AATestFragment";
+
+    ProgressDialog progress;
+    private TextView ourTextView;
+
+    protected LayoutManagerType mCurrentLayoutManagerType;
+
+    protected RadioButton mLinearLayoutRadioButton;
+    protected RadioButton mGridLayoutRadioButton;
+
+    protected RecyclerView mRecyclerView;
+    protected CustomAdapter mAdapter;
+    protected RecyclerView.LayoutManager mLayoutManager;
+    protected String[] mDataset;
+
     private Beer beer = null;
     public BeerFragment() {
-        System.out.println("COUCO");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        String url = "http://10.0.2.2/JSON/";
-
-        //JSON Node Names
-        final String TAG_NAME = "name";
-
-        JSONArray user = null;
-
-        // Creating new JSON Parser
-        JsonParser jParser = new JsonParser();
-
-        // Getting JSON from URL
-        JSONObject json = jParser.getJSONFromUrl(url);
-
-        try {
-            // Getting JSON Array
-            user = json.getJSONArray("bieres");
-            JSONObject c = user.getJSONObject(0);
-
-            // Storing  JSON item in a Variable
-            String name = c.getString(TAG_NAME);
-
-            View rootView = inflater.inflate(R.layout.fragment_beers, container, false);
-
-            //Importing TextView
-            final TextView name1 = (TextView)rootView.findViewById(R.id.name);
-
-            //Set JSON Data in TextView
-
-            name1.setText(name);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
         return inflater.inflate(R.layout.fragment_beers, container, false);
-
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, beersName);
-//
-//        View rootView = inflater.inflate(R.layout.fragment_beers, container, false);
-//        ListView listv = (ListView) rootView.findViewById(R.id.list_beers);
-//        listv.setAdapter(adapter);
-//        return inflater.inflate(R.layout.fragment_home, container, false);
     }
+
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        ourTextView = (TextView)getActivity().findViewById(R.id.name);
+        getContent();
+    }
+
+    private void getContent()
+    {
+        try
+        {
+            HttpGet httpGet = new HttpGet(new URI(TEST_URL));
+            HTTPRequest task = new HTTPRequest(getActivity(), ACTION_FOR_INTENT_CALLBACK);
+            task.execute(httpGet);
+            progress = ProgressDialog.show(getActivity(), "Getting Data ...", "Waiting For Results...", true);
+        }
+        catch (Exception e)
+        {
+            Log.e(TAG, e.getMessage());
+        }
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        getActivity().registerReceiver(receiver, new IntentFilter(ACTION_FOR_INTENT_CALLBACK));
+    }
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        getActivity().unregisterReceiver(receiver);
+    }
+
+    private BroadcastReceiver receiver = new BroadcastReceiver()
+    {
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
+            if (progress != null)
+                progress.dismiss();
+            String response = intent.getStringExtra(HTTPRequest.HTTP_RESPONSE);
+            //ourTextView.setText(response);
+            try {
+                JSONArray entries = new JSONArray(response);
+
+                String x = "JSON parsed.\nThere are [" + entries.length() + "]\n\n";
+
+                int i;
+                for (i=0;i<entries.length();i++)
+                {
+                    JSONObject post = null;
+                    try {
+                        post = entries.getJSONObject(i);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    x += "------------\n";
+                    try {
+                        x += "Date:" + post.getString("name") + "\n";
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                ourTextView.setText(x);
+            } catch (Exception je) {
+                ourTextView.setText("Error w/file: " + je.getMessage());
+            }
+        }
+    };
 }
