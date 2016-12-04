@@ -1,10 +1,12 @@
 package com.capshil.esieapp.controller.fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -53,6 +55,27 @@ public class NotificationsFragment extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "This is a Toast but please, don't eat me...", Toast.LENGTH_LONG).show();
                 showNotification("Title", "Content", "Ticker");
+            }
+        });
+        final Button button4 = (Button) v.findViewById(R.id.button_dialog_notifications);
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("How are you ?")
+                        .setMessage("Were you happy to discuss with me ?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(getActivity(), "Thanks, I've enjoy our meeting", Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(getActivity(), "Sorry for that", Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
             }
         });
 

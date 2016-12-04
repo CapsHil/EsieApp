@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import com.capshil.esieapp.R;
 import com.capshil.esieapp.controller.delegate.MainDelegate;
 import com.capshil.esieapp.controller.fragment.BeerFragment;
+import com.capshil.esieapp.controller.fragment.MapFragment;
+import com.capshil.esieapp.controller.fragment.TemperatureFragment;
 import com.capshil.esieapp.controller.fragment.HomeFragment;
 import com.capshil.esieapp.controller.fragment.NotificationsFragment;
 import com.capshil.esieapp.controller.listener.DrawerItemClickListener;
@@ -37,9 +39,11 @@ public class MainActivity extends BaseActivity {
         mNavigationArray = new ArrayList<>();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        mNavigationArray.add(new DrawerItem(R.string.home, R.drawable.ic_action_home_red));
-        mNavigationArray.add(new DrawerItem(R.string.notifications, R.drawable.ic_action_battery_red));
-        mNavigationArray.add(new DrawerItem(R.string.beers, R.drawable.ic_action_battery_red));
+        mNavigationArray.add(new DrawerItem(R.string.home, R.drawable.ic_launcher));
+        mNavigationArray.add(new DrawerItem(R.string.notifications, R.drawable.ic_launcher));
+        mNavigationArray.add(new DrawerItem(R.string.beers, R.drawable.ic_launcher));
+        mNavigationArray.add(new DrawerItem(R.string.temperature, R.drawable.ic_launcher));
+        mNavigationArray.add(new DrawerItem(R.string.map, R.drawable.ic_launcher));
         mDrawerList.setAdapter(new DrawerAdapter(this,R.layout.drawer_item, mNavigationArray));
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
 
@@ -78,6 +82,12 @@ public class MainActivity extends BaseActivity {
                 break;
             case 2:
                 fragment = new BeerFragment();
+                break;
+            case 3:
+                fragment = new TemperatureFragment();
+                break;
+            case 4:
+                fragment = new MapFragment();
                 break;
             default:
                 fragment = new HomeFragment();

@@ -6,6 +6,9 @@
     <string name="home">Home</string>
     <string name="notifications">Notifications</string>
     <string name="beers">Beers</string>
+    <string name="position">GPS</string>
+    <string name="temperature">Temperature</string>
+    <string name="map">Open Gmap</string>
 
     <!--Other-->
     <string name="app_name">App\'ache</string>
@@ -13,4 +16,11 @@
     <string name="title_activity_base">BaseActivity</string>
     <string name="action_settings">Settings</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="temperature_value">20</string>
+
+    <!--Notifications-->
+    <string name="notif_1">Push a notification !</string>
+    <string name="notif_2">Make a Toast !</string>
+    <string name="notif_3">Just do both !</string>
+    <string name="notif_4">Do you wanna dialog ?</string>
 </resources>

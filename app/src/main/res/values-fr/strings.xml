@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--Navigation drawer-->
-    <string name="drawer_open">Open navigation drawer</string>
-    <string name="drawer_close">Close navigation drawer</string>
-    <string name="home">Home</string>
+    <string name="home">Accueil</string>
     <string name="notifications">Notifications</string>
+    <string name="beers">Bières</string>
+    <string name="position">GPS</string>
+    <string name="temperature">Température</string>
+    <string name="map">Ouvrir Gmap</string>
 
     <!--Other-->
-    <string name="app_name">EsieApp</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_base">BaseActivity</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">App\'ache</string>
+    <string name="temperature_value">20</string>
+
+    <!--Notifications-->
+    <string name="notif_1">Push une notification !</string>
+    <string name="notif_2">Fait un Toast !</string>
+    <string name="notif_3">Pourquoi pas les deux ?</string>
+    <string name="notif_4">Tu as envie de dialoguer ?</string>
 </resources>

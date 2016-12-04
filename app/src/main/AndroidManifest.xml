@@ -5,14 +5,17 @@
     package="com.capshil.esieapp" >
 
     <uses-sdk
-        android:minSdkVersion="19"
-        android:targetSdkVersion="19" />
+        android:minSdkVersion="23"
+        android:targetSdkVersion="23" />
 
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true"/>
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.GPS_PROVIDER"/>
+    <uses-permission android:name="android.permission.NETWORK_PROVIDER"/>
+
     <service android:name=".JsonPullService" />
     <application
         android:allowBackup="true"

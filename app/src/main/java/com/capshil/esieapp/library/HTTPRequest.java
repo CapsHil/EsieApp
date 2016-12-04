@@ -47,7 +47,6 @@ public class HTTPRequest extends AsyncTask<HttpUriRequest, Void, String>
         }
         catch (Exception e)
         {
-            // TODO handle this properly
             e.printStackTrace();
             return "";
         }

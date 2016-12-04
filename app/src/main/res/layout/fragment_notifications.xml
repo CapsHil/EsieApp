@@ -12,18 +12,24 @@
         android:id="@+id/button_simple_notifications"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:text="Push a notification !"/>
+        android:text="@string/notif_1"/>
 
     <Button
         android:id="@+id/button_toast_notifications"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:text="Make a Toast !"/>
+        android:text="@string/notif_2"/>
 
     <Button
         android:id="@+id/button_both_notifications"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:text="Just do both !"/>
+        android:text="@string/notif_3"/>
+
+    <Button
+        android:id="@+id/button_dialog_notifications"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="@string/notif_4"/>
 
 </LinearLayout>
